@@ -72,21 +72,31 @@ def MakingURL1():
         url2=base+"efetch.fcgi?db="+db+"&query_key="+key+"&WebEnv="+web+"&rettype=abstract&retmode=text" #This is the url for the second database
     #url2=base+"efetch.fcgi?db="+db+"&query_key="+key+"&WebEnv="+web+"&rettype=fasta&retmode=text"
         #print(url2)
-        res2=requests.get(url2) #This function grants access to the contents received in the second database
-        type(res2)
+        #res2=requests.get(url2) #This function grants access to the contents received in the second database
+        #response=urlopen(url2)
+        #type(res2)
+        request=urllib.request.Request(url2)
+        result=urllib.request.urlopen(request)
+        resulttext=result.read()
+        resulttext=resulttext.decode("utf-8")
+        print(resulttext[0:10000])
         #data=urllib.request.urlopen(url2)
         #print(data)
         #JSON=res2.json()
         #print(JSON)
-        soup=BeautifulSoup(res2.text, "html.parser")
-        print(soup.get_text())
+        #JSON=res2.get_json_document
+        #print(JSON)
+        #soup=BeautifulSoup(res2.text, "html.parser")
+        #print(soup.get_text())
         outputs=[]
-        for line1 in soup: #This forloop is used to iterate through each item of the the second database
-            DOI=line1[line1.index("DOI: ")+len("DOI: "):line1.index('/n')] #This is to parse the DOI from the text
+        for DOI in resulttext: #This forloop is used to iterate through each item of the the second database
+            DOI=resulttext[resulttext.index("DOI:")+len("DOI: "):resulttext.index('P')] #This is to parse the DOI from the text
             #PMID=PMID.string.strip()
-            outputs.append(DOI) #Once in a string, this functon adds the string to the empty output string
-            dictionary.update({item:outputs})
+            #print(DOI)
+            #outputs.append(DOI) #Once in a string, this functon adds the string to the empty output string
+            outputs.append(DOI)
         print(outputs)
+        dictionary.update({item:outputs})
 
         
         #item=str(item) #This makes every item in the list a string
