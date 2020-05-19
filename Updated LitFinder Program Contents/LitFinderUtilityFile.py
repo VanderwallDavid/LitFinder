@@ -17,15 +17,14 @@ class Organizing_User_Input():
             line=line.rstrip()                                              #The input file is stripped             
             line=line.split()                                               #The lines are split accordingly             
             self.item_list+=line                                            #The item is appended to the list as astring             
-            self.item_number+=1                                             #The value of the gene items increases by one
-        self.item_number=str(self.item_number)                              #The self.item_number is converted to a string for use in the dataframe
-        return self.item_list, self.item_number                             #The manipulating list function returns the input list and the number of items
+            self.item_number+=1                                             #The value of the gene items increases by one                              #The self.item_number is converted to a string for use in the dataframe
+        return self.item_list, str(self.item_number)                             #The manipulating list function returns the input list and the number of items
 
     def manipulating_individual(self):                                      #The manipulating individual function serves to convert manual inputs into a centralized list                        
         for item in self.user_input:                                        #The for loop iterates through each item manually inserted by the user in the LitFinderParameterFile
             self.item_list+=str(item)                                       #The item is apended to the self.item_list as a string
             self.item_number+=1                                             #The value of the number of items increases by one
-        return self.item_list, str(self.item_number)                        #The manipulating individual function returns the input list as well as number of items
+        return self.item_list, str(self.item_number)                             #The manipulating individual function returns the input list as well as number of items
 
 #The Generating_URLs class serves as a class for producing a list of url's dependent upon input options of
 #The user specified in the LitFinderParameterFile, as well as iterable item specified 
